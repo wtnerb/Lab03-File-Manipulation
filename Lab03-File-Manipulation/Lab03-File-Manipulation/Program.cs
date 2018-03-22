@@ -7,14 +7,15 @@ namespace Lab03_File_Manipulation
 {
     public class Program
     {
+        public static string MY_PATH = "..\\..\\..\\..\\words.txt";
+
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            string myPath = "..\\..\\..\\..\\words.txt";
             string words = "blue green red";
             try
             {
-            using (StreamWriter sw = new StreamWriter(myPath))
+            using (StreamWriter sw = new StreamWriter(MY_PATH))
             {
                 sw.Write(words);
             }
@@ -30,6 +31,8 @@ namespace Lab03_File_Manipulation
             Regex rx = new Regex(match);
             return rx.IsMatch(source);
         }
+        
+
     }
 
     
