@@ -15,14 +15,14 @@ namespace Lab03_File_Manipulation
             string words = "blue green red";
             try
             {
-            using (StreamWriter sw = new StreamWriter(MY_PATH))
-            {
-                sw.Write(words);
-            }
+                using (StreamWriter sw = new StreamWriter(MY_PATH))
+                {
+                    sw.Write(words);
+                }
             }
             catch
             {
-                Console.WriteLine("Broke it.");
+                throw;
             }
         }
 
@@ -31,8 +31,24 @@ namespace Lab03_File_Manipulation
             Regex rx = new Regex(match);
             return rx.IsMatch(source);
         }
-        
 
+        public static string[] WordList(string path)
+        {
+            string text = "";
+            try
+            {
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    text = sr.ReadToEnd();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            char[] seperator = { ' ', '\n', '\t' };
+            return text.Split(seperator);
+        }
     }
 
     
