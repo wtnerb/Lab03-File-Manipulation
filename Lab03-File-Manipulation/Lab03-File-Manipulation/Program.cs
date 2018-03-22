@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.IO;
+using System.Text;
 
 namespace Lab03_File_Manipulation
 {
@@ -8,6 +10,19 @@ namespace Lab03_File_Manipulation
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            string myPath = "..\\..\\..\\..\\words.txt";
+            string words = "blue green red";
+            try
+            {
+            using (StreamWriter sw = new StreamWriter(myPath))
+            {
+                sw.Write(words);
+            }
+            }
+            catch
+            {
+                Console.WriteLine("Broke it.");
+            }
         }
 
         public static bool MatchExists(string match, string source)
@@ -16,4 +31,6 @@ namespace Lab03_File_Manipulation
             return rx.IsMatch(source);
         }
     }
+
+    
 }

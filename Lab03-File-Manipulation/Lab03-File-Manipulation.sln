@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab03-File-Manipulation", "Lab03-File-Manipulation\Lab03-File-Manipulation.csproj", "{31C340FE-D0F8-4FB7-A1D6-D95998DBF4C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab03-File-Manipulation", "Lab03-File-Manipulation\Lab03-File-Manipulation.csproj", "{31C340FE-D0F8-4FB7-A1D6-D95998DBF4C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestsForFileManipulation", "UnitTestsForFileManipulation\UnitTestsForFileManipulation.csproj", "{E31CB83A-D1E0-43A6-94FF-BBBAEF1441AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestsForFileManipulation", "UnitTestsForFileManipulation\UnitTestsForFileManipulation.csproj", "{E31CB83A-D1E0-43A6-94FF-BBBAEF1441AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
