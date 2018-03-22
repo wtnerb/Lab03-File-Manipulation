@@ -49,6 +49,8 @@ namespace Lab03_File_Manipulation
             Regex whiteSpace = new Regex("\\s+");
             return whiteSpace.Replace(text, ",").Split(',');
         }
+
+        public 
     }
 
     
