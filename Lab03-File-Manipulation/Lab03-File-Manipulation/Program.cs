@@ -46,8 +46,8 @@ namespace Lab03_File_Manipulation
             {
                 throw;
             }
-            char[] seperator = { ' ', '\n', '\t' };
-            return text.Split(seperator);
+            Regex whiteSpace = new Regex("\\s+");
+            return whiteSpace.Replace(text, ",").Split(',');
         }
     }
 
