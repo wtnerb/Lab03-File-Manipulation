@@ -24,6 +24,10 @@ namespace Lab03_File_Manipulation
             {
                 throw;
             }
+            string[] current = { "_", "_", "_", "_", "_" };
+            string word = "green";
+            string guess = "e";
+            NextDisplay(current, word, guess);
         }
 
         public static bool MatchExists(string match, string source)
@@ -50,7 +54,18 @@ namespace Lab03_File_Manipulation
             return whiteSpace.Replace(text, ",").Split(',');
         }
 
-        public 
+        public static string[] NextDisplay (string[] current, string word, string guess)
+        {
+            int ind = word.IndexOf(guess);
+            while (0 <= ind && ind < current.Length)
+            {
+                current[ind] = word.Substring(ind, 1);
+                ind = word.IndexOf(guess, ind + 1);
+            }
+
+
+            return current;
+        }
     }
 
     

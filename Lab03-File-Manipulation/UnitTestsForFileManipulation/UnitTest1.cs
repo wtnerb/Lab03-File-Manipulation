@@ -35,10 +35,14 @@ namespace UnitTestsForFileManipulation
             Assert.Equal(expect, WordList(path));
         }
 
-        [Theory]
-        [InlineData("_ _ _ _ n ", "_ _ _ _ _ ", "green", "n")]
-        public void CanJudgeGuess(string expected, string current, string word, string guess)
+        [Fact]
+        //[InlineData("_ _ _ _ n ", {"_", "_", "_", "_", "_"}, "green", "n")]
+        public void CanJudgeGuess()//(string expected, string current, string word, string guess)
         {
+            string[] expected = { "_", "_", "e", "e", "_" };
+            string[] current = { "_", "_", "_", "_", "_" };
+            string word = "green";
+            string guess = "e";
             Assert.Equal(expected, NextDisplay(current, word, guess));
         }
     }
