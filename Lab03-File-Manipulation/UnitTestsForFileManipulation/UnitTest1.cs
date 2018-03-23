@@ -45,5 +45,7 @@ namespace UnitTestsForFileManipulation
             string guess = "e";
             Assert.Equal(expected, NextDisplay(current, word, guess));
         }
+        
+
     }
 }

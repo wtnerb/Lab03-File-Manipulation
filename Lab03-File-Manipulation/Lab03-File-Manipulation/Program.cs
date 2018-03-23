@@ -62,9 +62,22 @@ namespace Lab03_File_Manipulation
                 current[ind] = word.Substring(ind, 1);
                 ind = word.IndexOf(guess, ind + 1);
             }
-
-
             return current;
+        }
+
+        public static void AddWord (string word, string path)
+        {
+            try
+            {
+                using (StreamWriter sw = File.AppendText(path))
+                {
+                    sw.WriteLine(word);
+                }
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 
