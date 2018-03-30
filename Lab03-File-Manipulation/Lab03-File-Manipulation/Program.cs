@@ -69,7 +69,7 @@ namespace Lab03_File_Manipulation
         {
             try
             {
-                using (StreamWriter sw = File.AppendText(path))
+                using (StreamWriter sw = new StreamWriter(path))
                 {
                     sw.WriteLine(word);
                 }
@@ -80,6 +80,4 @@ namespace Lab03_File_Manipulation
             }
         }
     }
-
-    
 }

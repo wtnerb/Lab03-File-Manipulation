@@ -45,7 +45,26 @@ namespace UnitTestsForFileManipulation
             string guess = "e";
             Assert.Equal(expected, NextDisplay(current, word, guess));
         }
-        
 
+        [Fact]
+        public void CanAddWord()
+        {
+            string words = "blue green\nred";
+            string path = "..\\..\\testcase.txt";
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    sw.Write(words);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            Assert.Equal(-1, (Array.IndexOf(WordList(path), "blueberry")));
+            AddWord("blueberry", path);
+            Assert.NotEqual(-1, (Array.IndexOf(WordList(path), "blueberry")));
+        }
     }
 }
