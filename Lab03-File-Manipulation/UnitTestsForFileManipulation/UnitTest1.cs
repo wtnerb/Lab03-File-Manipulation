@@ -62,7 +62,7 @@ namespace UnitTestsForFileManipulation
                 throw;
             }
             Assert.Equal(-1, (Array.IndexOf(Program.WordList(path), "blueberry")));
-            Program.AddWord("blueberry", path);
+            Program.AddWord("blueberry", path, Program.WordList(path));
             Assert.NotEqual(-1, (Array.IndexOf(Program.WordList(path), "blueberry")));
         }
     }
