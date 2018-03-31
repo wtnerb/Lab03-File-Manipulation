@@ -31,16 +31,16 @@ namespace Lab03_File_Manipulation
         {
             Boolean playing = true;
             Random rand = new Random();
-            string[] wordList = WordList(MY_PATH);
             while (playing)
             {
+                string[] wordList = WordList(MY_PATH);
                 Console.Clear();
                 Console.WriteLine("Would you like to play a game?");
                 Console.WriteLine("1. Play with random word\n" +
                                   "2. Add a word to list\n" +
                                   "3. Remove a word from list\n" +
                                   "4. Display word list\n" +
-                                  "5+ quit.");
+                                  "5. quit.");
                 byte option = 0;
                 for (byte count = 0; count < 10 && option < 1; count++)
                 {
@@ -50,6 +50,10 @@ namespace Lab03_File_Manipulation
                         if (option < 1)
                         {
                             throw new Exception("Run git blame");
+                        }
+                        if (option > 5)
+                        {
+                            throw new Exception("invald input, number too large!");
                         }
                     }
                     catch
@@ -126,7 +130,7 @@ namespace Lab03_File_Manipulation
                 using (StreamWriter sw = new StreamWriter(path))
                 {
                     sw.WriteLine(word);
-                    foreach(string w in wl)
+                    foreach (string w in wl)
                     {
                         sw.WriteLine(w);
                     }
