@@ -64,7 +64,7 @@ namespace Lab03_File_Manipulation
                 switch (option) // making sure this works in c# like in other languages. It does.
                 {
                     case 1:
-                        //GuessingLoop(wordList[rand.Next(0, wordList.Length)]);
+                        GuessingLoop(wordList[rand.Next(0, wordList.Length)]);
                         break;
                     case 2:
                         Console.Clear();
@@ -79,7 +79,7 @@ namespace Lab03_File_Manipulation
                         AddWord(w, MY_PATH, wordList);
                         break;
                     case 3:
-                        //RemoveWord();
+                        RemoveWord(wordList);
                         break;
                     case 4:
                         Console.Clear();
@@ -140,6 +140,58 @@ namespace Lab03_File_Manipulation
             {
                 throw;
             }
+        }
+
+        public static void RemoveWord(string[] wordList)
+        {
+            Console.WriteLine("What word would you like to remove?");
+            string word = Console.ReadLine().ToLower();
+            int ind = Array.IndexOf(wordList, word);
+            if (ind == -1)
+            {
+                Console.WriteLine("Could not find that word in the list. Try again?");
+            }
+            else
+            {
+                wordList[ind] = "";
+                using (StreamWriter sw = new StreamWriter(MY_PATH))
+                {
+                    foreach (string w in wordList)
+                    {
+                        sw.WriteLine(w);
+                    }
+                }
+                Console.WriteLine("success!");
+            }
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+        }
+        public static void GuessingLoop(string w)
+        {
+            Word wrd = new Word(w);
+            while (-1 != Array.IndexOf(wrd.Current, "_"))
+            {
+                Console.Clear();
+                string letter = "";
+                wrd.Display();
+                Console.WriteLine("What letter would you like to guess next?");
+                try
+                {
+                    letter = Console.ReadLine().ToLower();
+                    if (letter.Length > 1 || letter.Length == 0)
+                    {
+                        throw new Exception("invalid input");
+                    }
+                    wrd.NextDisplay(letter);
+                }
+                catch
+                {
+                    Console.WriteLine("Sorry, that input was not processed correctly.");
+                }
+            }
+            Console.WriteLine($"Congratulations, you guessed the word {wrd.Text.ToUpper()}!");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
         }
     }
 }

@@ -28,5 +28,14 @@ namespace Lab03_File_Manipulation
                 ind = Text.IndexOf(guess, ind + 1);
             }
         }
+
+        public void Display ()
+        {
+            foreach (string letter in Current)
+            {
+                Console.Write(letter + " ");
+            }
+            Console.WriteLine();
+        }
     }
 }
