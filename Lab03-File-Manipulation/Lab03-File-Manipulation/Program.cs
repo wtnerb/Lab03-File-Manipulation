@@ -155,21 +155,25 @@ namespace Lab03_File_Manipulation
             }
         }
 
+        /// <summary>
+        /// Gets user input to find and remove a word from the file.
+        /// </summary>
+        /// <param name="wordList">current word list</param>
         public static void RemoveWord(string[] wordList)
         {
             Console.WriteLine("What word would you like to remove?");
             string word = Console.ReadLine().ToLower();
-            if (-1 == Array.IndexOf(wordList, word))
+            if (-1 == Array.IndexOf(wordList, word))//word does not exist in array
             {
                 Console.WriteLine("Could not find that word in the list. Try again?");
             }
             else
-            {
+            {//word exists
                 using (StreamWriter sw = new StreamWriter(MY_PATH))
                 {
                     foreach (string w in wordList)
                     {
-                        if (w != word)
+                        if (w != word) //write everything that isn't the removed word
                         {
                             sw.WriteLine(w);
                         }
