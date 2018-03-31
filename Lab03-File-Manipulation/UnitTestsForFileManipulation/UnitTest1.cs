@@ -39,6 +39,7 @@ namespace UnitTestsForFileManipulation
         [Fact]
         public void CanAddWord()
         {
+            //Arrange
             string words = "blue green\nred";
             string path = "..\\..\\testcase.txt";
             try
@@ -52,8 +53,11 @@ namespace UnitTestsForFileManipulation
             {
                 throw;
             }
+            //Checking Arrangement
             Assert.Equal(-1, (Array.IndexOf(Program.WordList(path), "blueberry")));
+            //Act
             Program.Add("blueberry", path, Program.WordList(path));
+            //Assert
             Assert.NotEqual(-1, (Array.IndexOf(Program.WordList(path), "blueberry")));
         }
 
@@ -68,6 +72,33 @@ namespace UnitTestsForFileManipulation
             }
             Program.Add("blueberry", path, Program.WordList(path));
             Assert.NotEqual(-1, (Array.IndexOf(Program.WordList(path), "green")));
+        }
+
+        [Fact]
+        public void CanRemoveWord()
+        {
+            // Arrange
+            string words = "blue green\nred";
+            string path = "..\\..\\testcase.txt";
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    sw.Write(words);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            //First assert makes sure test arrangement was successful
+            Assert.NotEqual(-1, (Array.IndexOf(Program.WordList(path), "blue")));
+
+            //Act
+            Program.Remove("blue", path, Program.WordList(path));
+
+            //Assert word can be removed
+            Assert.Equal(-1, (Array.IndexOf(Program.WordList(path), "blue")));
         }
     }
 }

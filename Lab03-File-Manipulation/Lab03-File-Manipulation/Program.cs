@@ -163,13 +163,27 @@ namespace Lab03_File_Manipulation
         {
             Console.WriteLine("What word would you like to remove?");
             string word = Console.ReadLine().ToLower();
+            Remove(word, MY_PATH, wordList);
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// overwrites a file at location path with every word on word list except the matching word.
+        /// seperated from RemoveWord to be testable.
+        /// </summary>
+        /// <param name="word">word to remove</param>
+        /// <param name="path">target file</param>
+        /// <param name="wordList">list of words in the file.</param>
+        public static void Remove (string word, string path, string[] wordList)
+        {
             if (-1 == Array.IndexOf(wordList, word))//word does not exist in array
             {
                 Console.WriteLine("Could not find that word in the list. Try again?");
             }
             else
             {//word exists
-                using (StreamWriter sw = new StreamWriter(MY_PATH))
+                using (StreamWriter sw = new StreamWriter(path))
                 {
                     foreach (string w in wordList)
                     {
@@ -181,8 +195,6 @@ namespace Lab03_File_Manipulation
                 }
                 Console.WriteLine("success!");
             }
-            Console.WriteLine("Press any key to continue");
-            Console.ReadKey();
         }
 
         /// <summary>
