@@ -1,6 +1,4 @@
-
-scone
-
+orange
 blue
 green
 red

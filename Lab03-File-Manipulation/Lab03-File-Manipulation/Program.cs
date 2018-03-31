@@ -77,7 +77,7 @@ namespace Lab03_File_Manipulation
                     case 3://Remove word from list
                         RemoveWord(wordList);
                         break;
-                    case 4:
+                    case 4://displays word list
                         Console.Clear();
                         foreach(string wrd in wordList)
                         {
@@ -86,7 +86,7 @@ namespace Lab03_File_Manipulation
                         Console.WriteLine("Press any key to continue");
                         Console.ReadKey();
                         break;
-                    case 5:
+                    case 5://quit
                         playing = false;
                         break;
                     default: throw new Exception("this should never run");
@@ -159,19 +159,20 @@ namespace Lab03_File_Manipulation
         {
             Console.WriteLine("What word would you like to remove?");
             string word = Console.ReadLine().ToLower();
-            int ind = Array.IndexOf(wordList, word);
-            if (ind == -1)
+            if (-1 == Array.IndexOf(wordList, word))
             {
                 Console.WriteLine("Could not find that word in the list. Try again?");
             }
             else
             {
-                wordList[ind] = "";
                 using (StreamWriter sw = new StreamWriter(MY_PATH))
                 {
                     foreach (string w in wordList)
                     {
-                        sw.WriteLine(w);
+                        if (w != word)
+                        {
+                            sw.WriteLine(w);
+                        }
                     }
                 }
                 Console.WriteLine("success!");
