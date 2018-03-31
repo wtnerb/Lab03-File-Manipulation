@@ -6,9 +6,13 @@ namespace Lab03_File_Manipulation
 {
     public class Word
     {
-        public string Text { get; set; }
-        public string[] Current { get; set; }
+        public string Text { get; set; } // actual word
+        public string[] Current { get; set; } // guessed as letters, unguessed as underscore
 
+        /// <summary>
+        /// Constructor assigns text to word and initializes the Current array to underscores.
+        /// </summary>
+        /// <param name="text"></param>
         public Word(string text)
         {
             Text = text;
@@ -19,6 +23,10 @@ namespace Lab03_File_Manipulation
             }
         }
 
+        /// <summary>
+        /// Alters the Current parameter in accordance with the guess passed
+        /// </summary>
+        /// <param name="guess"></param>
         public void NextDisplay( string guess)
         {
             int ind = Text.IndexOf(guess);
@@ -29,6 +37,10 @@ namespace Lab03_File_Manipulation
             }
         }
 
+        /// <summary>
+        /// Prints to the console the current state of the word. Letters that have
+        /// been guessed will be displayed, others will be rendered as "_"
+        /// </summary>
         public void Display ()
         {
             foreach (string letter in Current)

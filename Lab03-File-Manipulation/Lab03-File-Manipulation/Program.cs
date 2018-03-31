@@ -12,7 +12,7 @@ namespace Lab03_File_Manipulation
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            string words = "blue green red";
+            string words = "blue green red";//default wordlist is boring
             try
             {
                 using (StreamWriter sw = new StreamWriter(MY_PATH))
@@ -27,6 +27,11 @@ namespace Lab03_File_Manipulation
             GameLoop();
         }
 
+        /// <summary>
+        /// Loops the user through the menu until they specify the quit option.
+        /// Each time valid user input is detected, this will run the appropriate functions.
+        /// Note: exceptions have distinctive messages so you can find where they are being thrown.
+        /// </summary>
         static void GameLoop()
         {
             Boolean playing = true;
@@ -63,22 +68,13 @@ namespace Lab03_File_Manipulation
                 }
                 switch (option) // making sure this works in c# like in other languages. It does.
                 {
-                    case 1:
+                    case 1://start guessing with a random word from the list
                         GuessingLoop(wordList[rand.Next(0, wordList.Length)]);
                         break;
-                    case 2:
-                        Console.Clear();
-                        Console.WriteLine("What word would you like to add?");
-                        string w = Console.ReadLine().ToLower();
-                        if (Array.Exists(wordList, x=> x == w))
-                        {
-                            Console.WriteLine("That word already exists in the list!\n" +
-                                "Press any key to continue");
-                            Console.ReadKey();
-                        }
-                        AddWord(w, MY_PATH, wordList);
+                    case 2://Add word to list
+                        AddWord(wordList);
                         break;
-                    case 3:
+                    case 3://Remove word from list
                         RemoveWord(wordList);
                         break;
                     case 4:
@@ -99,12 +95,11 @@ namespace Lab03_File_Manipulation
 
         }
 
-        public static bool MatchExists(string match, string source)
-        {
-            Regex rx = new Regex(match);
-            return rx.IsMatch(source);
-        }
-
+        /// <summary>
+        /// Builds a word list array of strings based on the text in the file at path
+        /// </summary>
+        /// <param name="path">path to the file</param>
+        /// <returns>string array of words in file</returns>
         public static string[] WordList(string path)
         {
             string text = "";
@@ -123,16 +118,34 @@ namespace Lab03_File_Manipulation
             return whiteSpace.Replace(text, ",").Split(',');
         }
 
-        public static void AddWord (string word, string path, string[] wl)
+        public static void AddWord (string[] wl)
+        {
+            Console.Clear();
+            Console.WriteLine("What word would you like to add?");
+            string w = Console.ReadLine().ToLower();
+            if (Array.Exists(wl, x => x == w))
+            {
+                Console.WriteLine("That word already exists in the list!\n" +
+                    "Press any key to continue");
+                Console.ReadKey();
+            }
+            else
+            {
+                Add(w, MY_PATH, wl);
+            }
+        }
+
+        public static void Add (string word, string path, string[] wordList)
         {
             try
             {
                 using (StreamWriter sw = new StreamWriter(path))
                 {
                     sw.WriteLine(word);
-                    foreach (string w in wl)
+                    //must rewrite all existing words
+                    foreach (string wd in wordList)
                     {
-                        sw.WriteLine(w);
+                        sw.WriteLine(wd);
                     }
                 }
             }
@@ -166,10 +179,15 @@ namespace Lab03_File_Manipulation
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();
         }
+
+        /// <summary>
+        /// The actual game itself.
+        /// </summary>
+        /// <param name="w">The word the user is trying to guess</param>
         public static void GuessingLoop(string w)
         {
             Word wrd = new Word(w);
-            while (-1 != Array.IndexOf(wrd.Current, "_"))
+            while (-1 != Array.IndexOf(wrd.Current, "_"))// a least one letter has not been guessed
             {
                 Console.Clear();
                 string letter = "";
