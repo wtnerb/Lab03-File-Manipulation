@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 using System.IO;
-using static Lab03_File_Manipulation.Program;
+using Lab03_File_Manipulation;
 
 namespace UnitTestsForFileManipulation
 {
@@ -12,7 +12,7 @@ namespace UnitTestsForFileManipulation
         [InlineData(false, "b", "cat")]
         public void CanMatch(bool expected, string match, string compare)
         {
-            Assert.Equal(expected, MatchExists(match, compare));
+            Assert.Equal(expected, Program.MatchExists(match, compare));
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace UnitTestsForFileManipulation
             {
                 throw;
             }
-            Assert.Equal(expect, WordList(path));
+            Assert.Equal(expect, Program.WordList(path));
         }
 
         [Fact]
@@ -40,10 +40,9 @@ namespace UnitTestsForFileManipulation
         public void CanJudgeGuess()//(string expected, string current, string word, string guess)
         {
             string[] expected = { "_", "_", "e", "e", "_" };
-            string[] current = { "_", "_", "_", "_", "_" };
-            string word = "green";
-            string guess = "e";
-            Assert.Equal(expected, NextDisplay(current, word, guess));
+            Word w = new Word("green");
+            w.NextDisplay("e");
+            Assert.Equal(expected, w.Current);
         }
 
         [Fact]
@@ -62,9 +61,9 @@ namespace UnitTestsForFileManipulation
             {
                 throw;
             }
-            Assert.Equal(-1, (Array.IndexOf(WordList(path), "blueberry")));
-            AddWord("blueberry", path);
-            Assert.NotEqual(-1, (Array.IndexOf(WordList(path), "blueberry")));
+            Assert.Equal(-1, (Array.IndexOf(Program.WordList(path), "blueberry")));
+            Program.AddWord("blueberry", path);
+            Assert.NotEqual(-1, (Array.IndexOf(Program.WordList(path), "blueberry")));
         }
     }
 }
